@@ -25,3 +25,11 @@ export function addTodoItem(todoItem) {
     field.appendChild(card);
 
 }
+
+export function addProjectItem(projectItem){
+    const field = document.getElementById("sidebar-field");
+    const label = document.createElement("p");
+    label.innerHTML = projectItem.name;
+
+    field.appendChild(label);
+}
