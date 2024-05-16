@@ -28,6 +28,27 @@
             <button id="add-todo-button">
                 Add Item
             </button>
+            <div id="add-form">
+                <form>
+                    <label for="title">Task Title:</label><br>
+                    <input type="text" id="title" name="title"><br>
+                    <label for="desc">Description:</label><br>
+                    <input type="text" id="desc" name="desc"><br>
+                    <label for="date">Date:</label><br>
+                    <input type="text" id="date" name="date"><br>
+                    <p>Priority:</p>
+                    <div id="radio-container">
+                        <input type="radio" id="low" name="priority" value="LOW">
+                        <label for="low">Low</label><br>
+                        <input type="radio" id="medium" name="priority" value="MEDIUM">
+                        <label for="medium">Medium</label><br>
+                        <input type="radio" id="high" name="priority" value="HIGH">
+                        <label for="high">High</label><br>
+                    </div>
+                    <input type="submit" value="Add" />
+                    <input type="reset" value="Cancel" id="cancel-button" />
+                </form>
+            </div>
             <div id="todo-field">
                 <div class="todo-card">
                     <input type="checkbox">

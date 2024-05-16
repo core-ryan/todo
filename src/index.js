@@ -1,7 +1,7 @@
 import './styles.css';
 import createTodoItem from './todo-item.js';
 import createProjectItem from './project-item.js';
-import { addTodoItem, addProjectItem } from './dom-functions.js';
+import { addTodoItem, addProjectItem, displayTaskForm, hideTaskForm } from './dom-functions.js';
 
 // Testing Object creation and methods
 const v = createTodoItem("New Title", "New Desc", "New Date", "New Priority");
@@ -14,9 +14,14 @@ newProject.addTask(x);
 // End Test
 
 document.getElementById("add-todo-button").addEventListener("click", function(){
-    addTodoItem(v);
+    displayTaskForm();
+    // addTodoItem(v);
 });
 
 document.getElementById("add-project-button").addEventListener("click", function(){
     addProjectItem(newProject);
+});
+
+document.getElementById("cancel-button").addEventListener("click", function(){
+    hideTaskForm()
 });

@@ -33,3 +33,13 @@ export function addProjectItem(projectItem){
 
     field.appendChild(label);
 }
+
+export function displayTaskForm(){
+    const form = document.getElementById("add-form");
+    form.style.display = "block";
+}
+
+export function hideTaskForm(){
+    const form = document.getElementById("add-form");
+    form.style.display = "none";
+}
