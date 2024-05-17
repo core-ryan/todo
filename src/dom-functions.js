@@ -43,3 +43,13 @@ export function hideTaskForm(){
     const form = document.getElementById("add-form");
     form.style.display = "none";
 }
+
+export function displayProjectForm(){
+    const form = document.getElementById("project-form");
+    form.style.display = "block";
+}
+
+export function hideProjectForm(){
+    const form = document.getElementById("project-form");
+    form.style.display = "none";
+}
