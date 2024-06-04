@@ -37,7 +37,7 @@
                 Add Item
             </button>
             <div id="add-form">
-                <form>
+                <form id="task-form" onsubmit="return false">
                     <label for="title">Task Title:</label><br>
                     <input type="text" id="title" name="title"><br>
                     <label for="desc">Description:</label><br>
@@ -53,7 +53,7 @@
                         <input type="radio" id="high" name="priority" value="HIGH">
                         <label for="high">High</label><br>
                     </div>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" id="submit-item"/>
                     <input type="reset" value="Cancel" id="cancel-button" />
                 </form>
             </div>

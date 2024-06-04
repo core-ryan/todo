@@ -31,3 +31,32 @@ document.getElementById("cancel-button-p").addEventListener("click", function(){
     hideProjectForm()
 });
 
+document.getElementById("submit-item").addEventListener("click", function(){
+    // will need to get current project
+    hideTaskForm();
+
+    const formDataTitle = document.getElementById("title").value;
+    const formDataDesc = document.getElementById("desc").value;
+    const formDataDate = document.getElementById("date").value;
+
+    // Holds checked radio button value retrived by following loop
+    let selectedRadio = "";
+
+    // Loops through form inputs
+    let inputs = document.getElementsByTagName("input");
+    for(let i = 0; i < inputs.length; i++){
+        // For every input, check that it is a radio button, and the checked status
+        if(inputs[i].type == "radio" && inputs[i].checked){
+            selectedRadio = inputs[i].value;
+        }
+    }
+
+    // New todo item created from form input
+    const newItem = createTodoItem(formDataTitle, formDataDesc, formDataDate, selectedRadio);
+
+    // Add new todo card in todo list
+    addTodoItem(newItem);
+
+    // Clears the "Add Item" form for new inputs
+    document.getElementById("task-form").reset();
+});

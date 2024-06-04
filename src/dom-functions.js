@@ -23,7 +23,6 @@ export function addTodoItem(todoItem) {
     card.appendChild(priorityText);
 
     field.appendChild(card);
-
 }
 
 export function addProjectItem(projectItem){
