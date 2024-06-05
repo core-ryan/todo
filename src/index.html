@@ -15,11 +15,11 @@
             <button id="add-project-button">
                 Add Project
             </button>
-            <div id="project-form">
-                <form>
+            <div id="project-form" onsubmit="return false">
+                <form id="pf-form">
                     <label for="project">Project Name:</label><br>
                     <input type="text" id="project" name="project"><br>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" id="submit-project"/>
                     <input type="reset" value="Cancel" id="cancel-button-p" />
                 </form>
             </div>

@@ -6,9 +6,8 @@ import { addTodoItem, addProjectItem, displayTaskForm, hideTaskForm, displayProj
 // Testing Object creation and methods
 const v = createTodoItem("New Title", "New Desc", "New Date", "New Priority");
 const x = createTodoItem("New Title 2", "New Desc 2", "New Date 2", "New Priority 2");
-const newProject = createProjectItem("Project 1");
-newProject.addTask(v);
-newProject.addTask(x);
+// newProject.addTask(v);
+// newProject.addTask(x);
 
 //alert(newProject.tasks[1].description);
 // End Test
@@ -33,6 +32,7 @@ document.getElementById("cancel-button-p").addEventListener("click", function(){
 
 document.getElementById("submit-item").addEventListener("click", function(){
     // will need to get current project
+    
     hideTaskForm();
 
     const formDataTitle = document.getElementById("title").value;
@@ -59,4 +59,18 @@ document.getElementById("submit-item").addEventListener("click", function(){
 
     // Clears the "Add Item" form for new inputs
     document.getElementById("task-form").reset();
+});
+
+document.getElementById("submit-project").addEventListener("click", function (){
+    hideProjectForm();
+
+    const newProject = createProjectItem(document.getElementById("project").value);
+
+    // Add project to main container
+
+    // Adds project name to sidebar project list
+    addProjectItem(newProject);
+
+    // Clears the "Add Project" form for new inputs
+    document.getElementById("pf-form").reset();
 });
