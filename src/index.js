@@ -1,7 +1,10 @@
 import './styles.css';
 import createTodoItem from './todo-item.js';
 import createProjectItem from './project-item.js';
+import createCore from './core.js';
 import { addTodoItem, addProjectItem, displayTaskForm, hideTaskForm, displayProjectForm, hideProjectForm } from './dom-functions.js';
+
+const mainCore = createCore();
 
 // Testing Object creation and methods
 const v = createTodoItem("New Title", "New Desc", "New Date", "New Priority");
@@ -48,6 +51,7 @@ document.getElementById("submit-item").addEventListener("click", function(){
         // For every input, check that it is a radio button, and the checked status
         if(inputs[i].type == "radio" && inputs[i].checked){
             selectedRadio = inputs[i].value;
+            console.log(mainCore);
         }
     }
 
@@ -57,6 +61,15 @@ document.getElementById("submit-item").addEventListener("click", function(){
     // Add new todo card in todo list
     addTodoItem(newItem);
 
+    // Search for appropriate project in main container
+    for(let i = 0; i < mainCore.container.length; i++){
+        // Select the current project
+        if(mainCore.container[i] == mainCore.current){
+            // Add new task to current project
+            mainCore.container[i].tasks.push(newItem);
+        }
+    }
+
     // Clears the "Add Item" form for new inputs
     document.getElementById("task-form").reset();
 });
@@ -65,12 +78,18 @@ document.getElementById("submit-project").addEventListener("click", function (){
     hideProjectForm();
 
     const newProject = createProjectItem(document.getElementById("project").value);
-
-    // Add project to main container
-
+    
     // Adds project name to sidebar project list
     addProjectItem(newProject);
 
+
+    // Add project to main container
+    if(mainCore.current == ""){
+        mainCore.current = newProject;
+    }
+    mainCore.container.push(newProject);
+
+    
     // Clears the "Add Project" form for new inputs
     document.getElementById("pf-form").reset();
 });
