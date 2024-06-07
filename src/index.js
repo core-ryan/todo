@@ -15,6 +15,10 @@ const x = createTodoItem("New Title 2", "New Desc 2", "New Date 2", "New Priorit
 //alert(newProject.tasks[1].description);
 // End Test
 
+document.getElementById("save").addEventListener("click", function(){
+    localStorage.save = mainCore;
+});
+
 document.getElementById("add-todo-button").addEventListener("click", function(){
     displayTaskForm();
     // addTodoItem(v);
