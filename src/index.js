@@ -1,10 +1,10 @@
 import './styles.css';
 import createTodoItem from './todo-item.js';
-import createProjectItem from './project-item.js';
+import { createProjectItem, createProjectItemJSON } from './project-item.js';
 import createCore from './core.js';
 import { addTodoItem, addProjectItem, displayTaskForm, hideTaskForm, displayProjectForm, hideProjectForm } from './dom-functions.js';
 
-const mainCore = createCore();
+let mainCore = createCore();
 
 // Testing Object creation and methods
 const v = createTodoItem("New Title", "New Desc", "New Date", "New Priority");
@@ -15,8 +15,35 @@ const x = createTodoItem("New Title 2", "New Desc 2", "New Date 2", "New Priorit
 //alert(newProject.tasks[1].description);
 // End Test
 
+window.onload = function(){
+//     mainCore = JSON.parse(localStorage.getItem('save'));
+//     for(let i = 0; i < mainCore.container.length; i++){
+//         alert(i);
+//     }
+    console.log(localStorage.getItem('save'));
+}
+
 document.getElementById("save").addEventListener("click", function(){
-    localStorage.save = mainCore;
+    // localStorage.setItem('save', JSON.stringify(mainCore));
+
+    // A 'core' object to hold a copy of mainCore excluding project methods
+    let copyCore = createCore();
+
+    // Loop through all projects currently in the mainCore
+    for(let i = 0; i < mainCore.container.length; i++){
+        // Create copy of project with no methods to save to localStorage
+        let tempProject = createProjectItemJSON(mainCore.container[i].name, mainCore.container[i].tasks, mainCore.container[i].finishedTasks);
+
+        copyCore.container.push(tempProject);
+    }
+
+    // console.log(copyCore);
+
+    localStorage.setItem('save', JSON.stringify(copyCore));
+});
+
+document.getElementById("clear").addEventListener("click", function(){
+    localStorage.clear();
 });
 
 document.getElementById("add-todo-button").addEventListener("click", function(){
@@ -86,13 +113,13 @@ document.getElementById("submit-project").addEventListener("click", function (){
     // Adds project name to sidebar project list
     addProjectItem(newProject);
 
-
+    console.log(newProject);
     // Add project to main container
     if(mainCore.current == ""){
         mainCore.current = newProject;
     }
     mainCore.container.push(newProject);
-
+    console.log(mainCore.container);
     
     // Clears the "Add Project" form for new inputs
     document.getElementById("pf-form").reset();

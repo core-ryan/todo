@@ -1,4 +1,4 @@
-export default function createProjectItem (newName) {
+export function createProjectItem (newName) {
     const name = newName;
     let tasks = [];
     let finishedTasks = [];
@@ -8,4 +8,12 @@ export default function createProjectItem (newName) {
     };
 
     return {name, tasks, finishedTasks, addTask, removeTask};
+}
+
+export function createProjectItemJSON (newName, newTasks, newFinished){
+    const name = newName;
+    let tasks = newTasks;
+    let finishedTasks = newFinished;
+
+    return {name, tasks, finishedTasks};
 }
