@@ -16,11 +16,49 @@ const x = createTodoItem("New Title 2", "New Desc 2", "New Date 2", "New Priorit
 // End Test
 
 window.onload = function(){
-//     mainCore = JSON.parse(localStorage.getItem('save'));
-//     for(let i = 0; i < mainCore.container.length; i++){
-//         alert(i);
-//     }
-    console.log(localStorage.getItem('save'));
+    let savedCore = JSON.parse(localStorage.getItem('save'));
+    // console.log(savedCore.container);
+
+    // Loop through all saved projects
+    for(let i = 0; i < savedCore.container.length; i++){
+        let tempProject = createProjectItem(savedCore.container[i].name);
+       
+        // Loop through tasks and add to temp project
+        for(let j = 0; j < savedCore.container[i].tasks.length; j++){
+            let tempItem = createTodoItem(savedCore.container[i].tasks[j].title,
+                savedCore.container[i].tasks[j].description,
+                savedCore.container[i].tasks[j].dueDate,
+                savedCore.container[i].tasks[j].priority);
+            
+            tempProject.tasks.push(tempItem);
+        }
+        // Loop through finished tasks and add to temp project
+        for(let k = 0; k < savedCore.container[i].finishedTasks.length; k++){
+            let tempItem = createTodoItem(savedCore.container[i].finishedTasks[k].title,
+                savedCore.container[i].finishedTasks[k].description,
+                savedCore.container[i].finishedTasks[k].dueDate,
+                savedCore.container[i].finishedTasks[k].priority);
+            
+            tempProject.finishedTasks.push(tempItem);
+        }
+        // Add project to the mainCore
+        mainCore.container.push(tempProject);
+
+        // Add project name to sidebar list
+        addProjectItem(tempProject);
+
+        // Check for current project to set first project as current
+        if(mainCore.current == ""){
+            mainCore.current = tempProject;
+            
+            // Populate the visual task list with todo items of current project
+            for(let l = 0; l < mainCore.current.tasks.length; l++){
+                addTodoItem(mainCore.current.tasks[l]);
+            }
+
+        }
+    }
+    console.log(mainCore.container);
 }
 
 document.getElementById("save").addEventListener("click", function(){
